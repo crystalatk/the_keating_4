@@ -1,12 +1,13 @@
 from subprocess import call
 import os
 import time
-from tqdm import tqdm
 from ascii_art import caught_graphic, get_away_graphic, win_graphic
 from pygame import mixer
 mixer.init()
 
 # Music
+
+
 def sound(file):
     sound = mixer.Sound(f"audio/{file}")
     return mixer.Sound.play(sound)
@@ -27,21 +28,21 @@ class Character:
     def print_alert_status(self):
         print_statement = f"***Your alert level is: {self.alert_level}***"
         return print_statement
-                
-    def alert_banner(self,border = '*'):
+
+    def alert_banner(self, border='*'):
         alert_status_length = len(self.print_alert_status())
         line = border * alert_status_length
         print(line)
         print(self.print_alert_status())
         print(line)
 
-
     def add_items(self, item):
         if item.on_use == False:
             for part in (self.parts):
                 if item.character_part == part[0]:
                     part[1] = False
-                    print(f"Your {part[0]} is now clean! One step closer to escaping!")
+                    print(
+                        f"Your {part[0]} is now clean! One step closer to escaping!")
         else:
             self.items.append(item)
         self.alert_level += item.alert_effect_pu
@@ -62,6 +63,7 @@ class Character:
 
 # Create method for using items(when items are used they affect alert level => items.alert_effect_used) Kurtis
 
+
     def item_used(self, item):
         self.alert_level += item.alert_effect_used
         play_game = self.alert_level_change(item)
@@ -78,131 +80,12 @@ class Character:
         sound("siren2.wav")
         caught_graphic()
 
-    def walking_the_hallway(self):
-        os.system('cls||clear')
-        print("You are trying to escape! Good luck.\nRememeber, if your alert level is too high, you will get caught!\nIt's time to sneak down to the lobby. You gather up the body and head down the hall. Hopefully, no one catches you!")
-        continue_on = input("Please press ENTER to continue.")
-        print("*----")
-        sound("footsteps.wav")
-        time.sleep(1)
-        os.system('cls||clear')
-        print("You are trying to escape! Good luck.\nRememeber, if your alert level is too high, you will get caught!\nIt's time to sneak down to the lobby. You gather up the body and head down the hall. Hopefully, no one catches you!")
-        print("Please press ENTER to continue.")
-        print("**---")
-        time.sleep(1)
-        os.system('cls||clear')
-        print("You are trying to escape! Good luck.\nRememeber, if your alert level is too high, you will get caught!\nIt's time to sneak down to the lobby. You gather up the body and head down the hall. Hopefully, no one catches you!")
-        print("Please press ENTER to continue.")
-        print("***--")
-        time.sleep(1)
-        os.system('cls||clear')
-        print("You are trying to escape! Good luck.\nRememeber, if your alert level is too high, you will get caught!\nIt's time to sneak down to the lobby. You gather up the body and head down the hall. Hopefully, no one catches you!")
-        print("Please press ENTER to continue.")
-        print("****-")
-        time.sleep(1)
-        os.system('cls||clear')
-        print("You are trying to escape! Good luck.\nRememeber, if your alert level is too high, you will get caught!\nIt's time to sneak down to the lobby. You gather up the body and head down the hall. Hopefully, no one catches you!")
-        print("Please press ENTER to continue.")
-        print("*****")
-        time.sleep(1)
-        os.system('cls||clear')
-        for i in tqdm(range(int(13e6))): 
-            pass
-    def elevator_going_down(self):
-        sound("elevator.wav")
-        os.system('cls||clear')
-        print('''
-        | * |
-        |   |
-        |   |
-        |   |
-        |   |
-        ''')
-        time.sleep(1)
-        os.system('cls||clear')
-        print('''
-        |   |
-        | * |
-        |   |
-        |   |
-        |   |
-        ''')
-        time.sleep(1)
-        os.system('cls||clear')
-        print('''
-        |   |
-        |   |
-        | * |
-        |   |
-        |   |
-        ''')
-        time.sleep(1)
-        os.system('cls||clear')
-        print('''
-        |   |
-        |   |
-        |   |
-        | * |
-        |   |
-        ''')
-        time.sleep(1)
-        os.system('cls||clear')
-        print('''
-        |   |
-        |   |
-        |   |
-        |   |
-        | * |
-        ''')
-        time.sleep(1)
-        os.system('cls||clear')
-        for i in tqdm(range(int(13e6))): 
-            pass
-    def sneak_past_security(self):
-        sound("footsteps.wav")
-        os.system('cls||clear')
-        print("*----")
-        time.sleep(.5)
-        os.system('cls||clear')
-        print("-*---")
-        time.sleep(.5)
-        os.system('cls||clear')
-        print("--*--")
-        time.sleep(.5)
-        os.system('cls||clear')
-        print("---*-")
-        time.sleep(.5)
-        os.system('cls||clear')
-        print("----*")
-        time.sleep(.5)
-        os.system('cls||clear')
-        for i in tqdm(range(int(13e6))): 
-            pass
-    def casual_past_security(self):
-        sound("footsteps.wav")
-        os.system('cls||clear')
-        print("|----")
-        time.sleep(.5)
-        os.system('cls||clear')
-        print("-|---")
-        time.sleep(.5)
-        os.system('cls||clear')
-        print("--|--")
-        time.sleep(.5)
-        os.system('cls||clear')
-        print("---|-")
-        time.sleep(.5)
-        os.system('cls||clear')
-        print("----|")
-        time.sleep(.5)
-        os.system('cls||clear')
-        for i in tqdm(range(int(13e6))): 
-            pass
     def garage_scene(self):
         print("You made it to the garage! You did it! But is Brittani waiting for you?")
         time.sleep(3)
         if self.alert_level < 40:
-            print("She's driving the getaway car! You made it!")#<<<<----Create a great win statement!
+            # <<<<----Create a great win statement!
+            print("She's driving the getaway car! You made it!")
             sound("tires.wav")
             get_away_graphic()
             win_graphic()
